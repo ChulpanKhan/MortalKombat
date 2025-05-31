@@ -19,6 +19,7 @@ public class ItemsDialog extends javax.swing.JDialog {
     private Human human;
     private Player enemy;
     private final Items[] items = ItemsStorage.getItems();
+    private java.awt.Frame parent;
 
     /**
      * Creates new form ItemsDialog
@@ -27,6 +28,7 @@ public class ItemsDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.human = human;
+        this.parent = parent;
         updateItemButtons();
     }
 
@@ -39,12 +41,17 @@ public class ItemsDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        itemButtonGroup = new javax.swing.ButtonGroup();
         itemsPanel = new javax.swing.JPanel();
         itemsLabel = new javax.swing.JLabel();
         smallPotionRadioButton = new javax.swing.JRadioButton();
         bigPotionRadioButton = new javax.swing.JRadioButton();
         rebirthCrossRadioButton = new javax.swing.JRadioButton();
         useItemButton = new javax.swing.JButton();
+
+        itemButtonGroup.add(smallPotionRadioButton);
+        itemButtonGroup.add(bigPotionRadioButton);
+        itemButtonGroup.add(rebirthCrossRadioButton);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -153,15 +160,20 @@ public class ItemsDialog extends javax.swing.JDialog {
         else if (bigPotionRadioButton.isSelected()) selectedIndex = 1;
         else if (rebirthCrossRadioButton.isSelected()) selectedIndex = 2;
         
+        if (selectedIndex == -1){
+            dispose();
+            return;
+        }
+        
         if (items[selectedIndex].getCount() <= 0) {         
-            CannotUseItemDialog errorDialog = new CannotUseItemDialog();
+            CannotUseItemDialog errorDialog = new CannotUseItemDialog(parent, rootPaneCheckingEnabled);
             errorDialog.setVisible(true);
             errorDialog.setBounds(300, 200, 400, 300);
         } else {
             fight.getAction().useItem(enemy, items, selectedIndex);
         }
         
-        updateItemButtons();
+        //updateItemButtons();
         dispose();
     }//GEN-LAST:event_useItemButtonActionPerformed
 
@@ -169,7 +181,7 @@ public class ItemsDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_rebirthCrossRadioButtonActionPerformed
 
-    public void updateItemButtons() {
+    private void updateItemButtons() {
         smallPotionRadioButton.setText(items[0].getName() + ", " + items[0].getCount() + " шт");
         bigPotionRadioButton.setText(items[1].getName() + ", " + items[1].getCount() + " шт");
         rebirthCrossRadioButton.setText(items[2].getName() + ", " + items[2].getCount() + " шт");
@@ -177,6 +189,7 @@ public class ItemsDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton bigPotionRadioButton;
+    private javax.swing.ButtonGroup itemButtonGroup;
     private javax.swing.JLabel itemsLabel;
     private javax.swing.JPanel itemsPanel;
     private javax.swing.JRadioButton rebirthCrossRadioButton;

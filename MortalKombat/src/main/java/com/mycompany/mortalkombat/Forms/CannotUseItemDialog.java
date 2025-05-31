@@ -13,8 +13,8 @@ public class CannotUseItemDialog extends javax.swing.JDialog {
     /**
      * Creates new form CannotUseItemDialog
      */
-    public CannotUseItemDialog() {
-        //super(parent, modal);
+    public CannotUseItemDialog(java.awt.Frame parent,  boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 

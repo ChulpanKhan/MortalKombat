@@ -458,7 +458,7 @@ public class FightFrame extends javax.swing.JFrame {
 
     private void performFightTurn(int attackType) {
         fight.hit(human, enemy, attackType);
-        //updateNewRoundUI();
+        updateNewRoundUI();
 
         //Проверка на завершение раунда
         if (human.getHealth() <= 0 || enemy.getHealth() <= 0) {

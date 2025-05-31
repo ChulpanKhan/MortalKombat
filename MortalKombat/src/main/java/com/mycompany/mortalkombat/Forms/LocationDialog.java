@@ -122,10 +122,6 @@ public class LocationDialog extends javax.swing.JDialog {
         fightFrame.setVisible(true);
     }//GEN-LAST:event_okButtonActionPerformed
 
-//    public int getTotalLocations() {
-//        return totalLocations;
-//    }
-    
     public boolean isApproved() {
         return approved;
     }
