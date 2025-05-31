@@ -227,8 +227,8 @@ public class CharacterAction {
             default -> 100;
         };
 
-        enemy.setMaxHealth((int)enemy.getBaseMaxHealth() * hpScale / 100);
-        enemy.setDamage((int)enemy.getBaseDamage() * dmgScale / 100);
+        enemy.setMaxHealth((int)enemy.getMaxHealth() * hpScale / 100);
+        enemy.setDamage((int)enemy.getDamage() * dmgScale / 100);
         enemy.levelUp();
     }
     

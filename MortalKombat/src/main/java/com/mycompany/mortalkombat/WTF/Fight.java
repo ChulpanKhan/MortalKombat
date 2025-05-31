@@ -111,7 +111,7 @@ public class Fight {
                     int weakenTurns = (attacker.getLevel() == 0) ? 2 : attacker.getLevel()+1;
                     defender.setWeakened(weakenTurns);
                     debufStatus = defender.getName() + " was weakened for " + weakenTurns + " turns!";
-                    actionStatus = debufStatus;
+                    actionStatus = defender.getName() + " was weakened";
                 } else {
                     debufStatus = "Resisted weakening!";
                     actionStatus = debufStatus;
@@ -248,9 +248,8 @@ public class Fight {
                 } else if (attackChoice == 1) {// Атака
                     int doubleDmg = human.getDamage() * 2;
                     boss.setHealth(- doubleDmg);
-                    actionStatus = "You interrupted the regeneration! The boss took " + doubleDmg + " damage!";
-                } else {
-                    actionStatus = "bla bla";
+                    actionStatus = "You interrupted the regeneration!";
+                    debufStatus = "The boss took " + doubleDmg + " damage!";
                 }
                 boss.setRegenerating(false);
                 return true;
@@ -302,8 +301,11 @@ public class Fight {
      */
     public void endFinalRound(Human human) {
         if (human.getHealth() > 0) {
+            fightResult = "You win";
             human.setWin();
             action.applyExperience(human, true);
+        } else {
+            fightResult = "Shao Kahn wins";
         }
         boolean isTop = isTop10(human);
         human.setInTop10(isTop);
