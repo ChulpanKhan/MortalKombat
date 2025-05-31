@@ -182,9 +182,7 @@ public class Fight {
 
         human.setAttack(attackChoice);
         //Регенерация босса
-        if (handleShaoKahnRegeneration(human, enemy, attackChoice)) {
-            return;
-        }
+       handleShaoKahnRegeneration(human, enemy, attackChoice);
         //Загрузка поведения противника
         if (patternIndex < currentPattern.length - 1) {
             patternIndex++;
@@ -235,7 +233,7 @@ public class Fight {
      * @return true если обработка завершена (нужно выйти из hit), false если
      * продолжаем обычную логику боя.
      */
-    private boolean handleShaoKahnRegeneration(Player human, Player enemy, int attackChoice) {
+    private void handleShaoKahnRegeneration(Player human, Player enemy, int attackChoice) {
         if (enemy instanceof ShaoKahn) {
             ShaoKahn boss = (ShaoKahn) enemy;
 
@@ -252,17 +250,17 @@ public class Fight {
                     debufStatus = "The boss took " + doubleDmg + " damage!";
                 }
                 boss.setRegenerating(false);
-                return true;
+    //            return true;
             }
 
             // Иначе: шанс начать регенерацию
             if ((Math.random() < 0.15  || boss.getHealth() <= human.getDamage())&& !boss.hasRegenerated()) {
                 boss.setRegenerating(true);
                 actionStatus = "The boss is trying to regenerate!";
-                return true;
+  //              return true;
             }
         }
-        return false;
+//        return false;
     }
 
     /**
