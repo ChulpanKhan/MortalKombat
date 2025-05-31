@@ -182,7 +182,7 @@ public class Fight {
 
         human.setAttack(attackChoice);
         //Регенерация босса
-        handleShaoKahnRegeneration(human, enemy, attackChoice)
+        handleShaoKahnRegeneration(human, enemy, attackChoice);
         //Загрузка поведения противника
         if (patternIndex < currentPattern.length - 1) {
             patternIndex++;
@@ -233,7 +233,7 @@ public class Fight {
      * @return true если обработка завершена (нужно выйти из hit), false если
      * продолжаем обычную логику боя.
      */
-    private boolean handleShaoKahnRegeneration(Player human, Player enemy, int attackChoice) {
+    private void handleShaoKahnRegeneration(Player human, Player enemy, int attackChoice) {
         if (enemy instanceof ShaoKahn) {
             ShaoKahn boss = (ShaoKahn) enemy;
 
